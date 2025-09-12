@@ -1,17 +1,13 @@
 package violyte.nodes.view;
 
+import javafx.geometry.Pos;
+
 public class NodeBoxInput extends NodeBoxField {    
     public NodeBoxInput(String labelText) {
         super(labelText);
-        /*DoubleBinding halfHeight = heightProperty().divide(2);
         
-        getLabel().layoutXProperty().set(10);
-        getLabel().layoutYProperty().bind(halfHeight);
-
-        getHandle().layoutYProperty().bind(halfHeight);*/
-
-        setLeftAnchor(getHandle(), -HANDLE_RADIUS);
-        setLeftAnchor(getLabel(), 10.0);
+        setAlignment(getHandle(), Pos.CENTER_LEFT);
+        setAlignment(getLabel(), Pos.CENTER_LEFT);
 
         getHandle().getStyleClass().add("node-box-input-handle");
         getStyleClass().add("node-box-input");

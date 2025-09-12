@@ -1,7 +1,7 @@
 package violyte.nodes.view;
 
 import javafx.geometry.Bounds;
-import javafx.scene.paint.Color;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.CubicCurve;
 
 public class NodeWire extends CubicCurve {
@@ -11,12 +11,13 @@ public class NodeWire extends CubicCurve {
     public NodeWire(NodeBoxOutput startNode, NodeBoxInput endNode) {
         this.startNode = startNode;
         this.endNode = endNode;
-
-        setFill(null);
-        setStroke(Color.BLACK);
+        setStartNode(startNode);
+        setEndNode(endNode);
 
         updateStartPos();
         updateEndPos();
+
+        getStyleClass().add("node-wire");
     }
 
     public void setStartNode(NodeBoxOutput startNode) {
@@ -28,8 +29,8 @@ public class NodeWire extends CubicCurve {
     }
 
     public void updateStartPos() {
-        Bounds start = startNode.localToScene(startNode.getCircle().getBoundsInParent());
-        Bounds end = endNode.localToScene(endNode.getCircle().getBoundsInParent());
+        Bounds start = startNode.localToScene(startNode.getHandle().getBoundsInParent());
+        Bounds end = endNode.localToScene(endNode.getHandle().getBoundsInParent());
         double midX = Math.abs(end.getCenterX() - start.getCenterX()) / 2.0;
 
         setStartX(start.getCenterX());
@@ -39,8 +40,8 @@ public class NodeWire extends CubicCurve {
     }
 
     public void updateEndPos() {
-        Bounds start = startNode.localToScene(startNode.getCircle().getBoundsInParent());
-        Bounds end = endNode.localToScene(endNode.getCircle().getBoundsInParent());
+        Bounds start = startNode.localToScene(startNode.getHandle().getBoundsInParent());
+        Bounds end = endNode.localToScene(endNode.getHandle().getBoundsInParent());
         double midX = Math.abs(end.getCenterX() - start.getCenterX()) / 2.0;
 
         setEndX(end.getCenterX());

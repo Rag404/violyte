@@ -1,25 +1,16 @@
 package violyte.nodes.view;
 
+import javafx.geometry.Pos;
+
 public class NodeBoxOutput extends NodeBoxField {
     
     public NodeBoxOutput(String labelText) {
         super(labelText);
-        /*DoubleBinding halfHeight = heightProperty().divide(2);
         
-        getLabel().layoutXProperty().bind(
-            widthProperty()
-            .subtract(getLabel().widthProperty())
-            .subtract(10)
-        );
-        getLabel().layoutYProperty().bind(halfHeight);
-        
-        getHandle().layoutXProperty().bind(widthProperty());
-        getHandle().layoutYProperty().bind(halfHeight);*/
+        setAlignment(getHandle(), Pos.CENTER_RIGHT);
+        setAlignment(getLabel(), Pos.CENTER_RIGHT);
 
-        setRightAnchor(getHandle(), -HANDLE_RADIUS);
-        setRightAnchor(getLabel(), 10.0);
-
-        getHandle().getStyleClass().add("node-box-input-handle");
+        getHandle().getStyleClass().add("node-box-output-handle");
         getStyleClass().add("node-box-input");
     }
 }

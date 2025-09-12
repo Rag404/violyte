@@ -1,6 +1,17 @@
+.node-editor {
+    -fx-background-color: #1d1d1d;
+}
+
+.node-wire {
+    -fx-fill: none;
+    -fx-stroke: #909090;
+    -fx-stroke-width: 1.5;
+}
+
 .node-box {
     -fx-background-color: #303030;
     -fx-background-radius: 4;
+    -fx-padding: 0 0 2 0;
     -fx-effect: dropshadow(three-pass-box, black, 20, 0, 0, 2);
 }
 
@@ -17,12 +28,18 @@
     -fx-padding: 2 0 2 0;
 }
 
-.node-box-field .label {
+.node-box-label {
     -fx-text-fill: white;
+    -fx-padding: 0 10 0 10;
 }
 
 .node-box-handle {
     -fx-fill: #303030;
     -fx-stroke: #ffffff80;
     -fx-stroke-width: 1;
+}
+
+.node-box-input-handle {
+    /* magic number */
+    -fx-translate-x: -10;
 }
