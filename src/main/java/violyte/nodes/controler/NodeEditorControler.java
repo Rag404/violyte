@@ -19,6 +19,7 @@ import violyte.nodes.view.NodeEditorView;
 public class NodeEditorControler {
     private NodeEditorView view;
     private Set<? extends Node<?>> nodeList;
+    private NodeBox selectedNodeBox = null;
 
     public NodeEditorControler(NodeEditorView view, Set<? extends Node<?>> nodeList) {
         this.view = view;
@@ -46,7 +47,14 @@ public class NodeEditorControler {
         }
     }
 
-    public void addNode(Node<?> node, double x, double y) {
+    /**
+     * Add a node to the editor at the specified position.
+     * @param node The node to add
+     * @param x The x position to add the node at
+     * @param y The y position to add the node at
+     * @return The created NodeBox
+     */
+    public NodeBox addNode(Node<?> node, double x, double y) {
         NodeBox nodeBox = new NodeBox(node.getLabel());
         for (NodeInput<?> input : node.getInputs()) {
             nodeBox.addField(new NodeBoxInput(input.getLabel()));
@@ -55,10 +63,24 @@ public class NodeEditorControler {
         nodeBox.setLayoutX(x);
         nodeBox.setLayoutY(y);
         addNode(nodeBox);
+        return nodeBox;
     }
 
-    public void addNode(Node<?> node) {
-        this.addNode(node, 0, 0);
+    /**
+     * Add a node to the editor at position (0, 0).
+     * @param node The node to add
+     * @return The created NodeBox
+     */
+    public NodeBox addNode(Node<?> node) {
+        return this.addNode(node, 0, 0);
+    }
+
+    public void selectNodeBox(NodeBox nodeBox) {
+        if (selectedNodeBox != null) {
+            selectedNodeBox.setSelected(false);
+        }
+        selectedNodeBox = nodeBox;
+        selectedNodeBox.setSelected(true);
     }
 
     /**
@@ -107,6 +129,7 @@ public class NodeEditorControler {
         }
 
         public void handle(MouseEvent event) {
+            selectNodeBox(nodeBox);
             
             double offsetX = event.getSceneX() - nodeBox.getLayoutX();
             double offsetY = event.getSceneY() - nodeBox.getLayoutY();
@@ -154,7 +177,8 @@ public class NodeEditorControler {
             SearchableComboBox<Node<?>> comboBox = view.getSearchBox();
             Node<?> selectedNode = comboBox.getSelectionModel().getSelectedItem();
             if (selectedNode != null) {
-                addNode(selectedNode, comboBox.getLayoutX(), comboBox.getLayoutY());
+                NodeBox nodeBox = addNode(selectedNode, comboBox.getLayoutX(), comboBox.getLayoutY());
+                selectNodeBox(nodeBox);
                 comboBox.getSelectionModel().clearSelection();
             }
             

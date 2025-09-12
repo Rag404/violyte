@@ -15,6 +15,11 @@
     -fx-effect: dropshadow(three-pass-box, black, 20, 0, 0, 2);
 }
 
+.node-box-selected {
+    -fx-background-color: #ffffff, #303030;
+    -fx-background-insets: -1.5, 0;
+}
+
 .node-box-header {
     -fx-background-color: #eb4b3f;
     -fx-background-radius: 4 4 0 0;

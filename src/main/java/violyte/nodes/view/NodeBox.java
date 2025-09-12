@@ -59,4 +59,12 @@ public class NodeBox extends VBox {
             outputs.add((NodeBoxOutput) field);
         }
     }
+
+    public void setSelected(boolean selected) {
+        if (selected && !getStyleClass().contains("node-box-selected")) {
+            getStyleClass().add("node-box-selected");
+        } else {
+            getStyleClass().remove("node-box-selected");
+        }
+    }
 }
