@@ -20,6 +20,19 @@ I am definitely still a visual enthusiast rather than a real artist, but I have 
  - [Blender](https://www.blender.org/), which scares me. Having every imaginable feature is technically a pro, but for my personal use having that many tabs and settings is just distracting if not confusing.
  - Maybe also [Touchdesigner](https://derivative.ca/), which is fully node-based but is simply not designed for the kind of media I usually make.
 
+### Quick Start
+
+Requirements : Java 24 and [Maven](https://maven.apache.org/install.html)
+
+After cloning/downloading this repository, run these commands inside the `violyte` directory :
+```bash
+# Compile the project
+mvn compile
+
+# Run it
+mvn javafx:run
+```
+
 <br/>
 
 > ###### Shameless plugging
