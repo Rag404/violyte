@@ -4,8 +4,8 @@ import javafx.geometry.Pos;
 
 public class NodeBoxOutput extends NodeBoxField {
     
-    public NodeBoxOutput(String labelText) {
-        super(labelText);
+    public NodeBoxOutput(NodeBox parent, String labelText) {
+        super(parent, labelText);
         
         setAlignment(getHandle(), Pos.CENTER_RIGHT);
         setAlignment(getLabel(), Pos.CENTER_RIGHT);

@@ -10,11 +10,13 @@ import javafx.scene.shape.Circle;
  */
 public abstract class NodeBoxField extends StackPane {
     public static final double HANDLE_RADIUS = 4.5;
+    public NodeBox parentNodeBox;
     private Label label;
     private Circle handleCircle;
     private NodeWire wire;
     
-    public NodeBoxField(String labelText) {
+    public NodeBoxField(NodeBox parent, String labelText) {
+        this.parentNodeBox = parent;
         label = new Label(labelText);
         handleCircle = new Circle(HANDLE_RADIUS);
 
@@ -37,6 +39,10 @@ public abstract class NodeBoxField extends StackPane {
             double y = (height - childHeight) / 2;
             child.resizeRelocate(x, y, childWidth, childHeight);
         }
+    }
+
+    public NodeBox getParentNodeBox() {
+        return parentNodeBox;
     }
 
     public Label getLabel() {

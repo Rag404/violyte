@@ -7,12 +7,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class NodeBox extends VBox {
+    private int nodeId;
     private Label titleLabel;
     private VBox fieldsBox;
     private ArrayList<NodeBoxInput> inputs;
     private ArrayList<NodeBoxOutput> outputs;
 
-    public NodeBox(String title) {
+    public NodeBox(int nodeId, String title) {
+        this.nodeId = nodeId;
         titleLabel = new Label(title);
         fieldsBox = new VBox();
         inputs = new ArrayList<>();
@@ -26,6 +28,10 @@ public class NodeBox extends VBox {
 
         getChildren().addAll(headerPane, fieldsBox);
         getStyleClass().add("node-box");
+    }
+
+    public int getNodeId() {
+        return nodeId;
     }
 
     /**
@@ -53,16 +59,44 @@ public class NodeBox extends VBox {
     public void addField(NodeBoxField field) {
         fieldsBox.getChildren().add(field);
 
-        if (field instanceof NodeBoxInput) {
-            inputs.add((NodeBoxInput) field);
-        } else if (field instanceof NodeBoxOutput) {
-            outputs.add((NodeBoxOutput) field);
+        if (field instanceof NodeBoxInput nodeBoxInput) {
+            inputs.add(nodeBoxInput);
+        } else if (field instanceof NodeBoxOutput nodeBoxOutput) {
+            outputs.add(nodeBoxOutput);
         }
     }
 
+    /**
+     * Create and add an input field to this node.
+     * @param labelText The label text of the input field
+     * @return The created NodeBoxInput
+     */
+    public NodeBoxInput addInput(String labelText) {
+        NodeBoxInput input = new NodeBoxInput(this, labelText);
+        addField(input);
+        return input;
+    }
+
+    /**
+     * Create and add an output field to this node.
+     * @param labelText The label text of the output field
+     * @return The created NodeBoxOutput
+     */
+    public NodeBoxOutput addOutput(String labelText) {
+        NodeBoxOutput output = new NodeBoxOutput(this, labelText);
+        addField(output);
+        return output;
+    }
+
+    /**
+     * Set whether this node is selected or not.
+     * @param selected True to mark this node as selected, false to unselect it
+     */
     public void setSelected(boolean selected) {
-        if (selected && !getStyleClass().contains("node-box-selected")) {
-            getStyleClass().add("node-box-selected");
+        if (selected) {
+            if (!getStyleClass().contains("node-box-selected")) {
+                getStyleClass().add("node-box-selected");
+            }
         } else {
             getStyleClass().remove("node-box-selected");
         }

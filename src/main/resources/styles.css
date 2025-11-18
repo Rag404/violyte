@@ -48,3 +48,8 @@
     /* magic number */
     -fx-translate-x: -10;
 }
+
+.selection-rectangle {
+    -fx-fill: #ffffff30;
+    -fx-stroke: #ffffff80;
+}
